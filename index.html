@@ -43,14 +43,6 @@
             box-sizing: border-box;
             background-color: #fff;
         }
-        .controls input[type="number"] {
-            -moz-appearance: textfield;
-        }
-        .controls input[type="number"]::-webkit-outer-spin-button,
-        .controls input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
         .background-container {
             position: relative;
             margin-top: 20px;
@@ -58,7 +50,6 @@
         .background-container img {
             width: 100%;
             display: block;
-            border-radius: 8px;
         }
         .container {
             position: absolute;
@@ -80,8 +71,8 @@
         .image-slot img {
             width: var(--img-width, 100px); /* Устанавливаем ширину изображения через переменную */
             height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border: none; /* Убираем рамку */
+            box-shadow: none; /* Убираем тень */
         }
     </style>
 </head>
@@ -89,13 +80,13 @@
     <h2>Выберите изображение</h2>
     <div class="controls">
         <input type="file" id="imageInput" accept="image/*">
-        <label for="width">Ширина (px): <input type="number" id="width" value="90"></label>
-        <label for="col-gap">Расстояние по горизонтали (%): <input type="number" id="col-gap" value="23.85"></label>
-        <label for="row-gap">Расстояние по вертикали (%): <input type="number" id="row-gap" value="28"></label>
-        <label for="start-x">Положение X (%): <input type="number" id="start-x" value="9.5"></label>
-        <label for="start-y">Положение Y (%): <input type="number" id="start-y" value="7"></label>
-        <label for="cols">Столбцы: <input type="number" id="cols" value="5"></label>
-        <label for="rows">Ряды: <input type="number" id="rows" value="5"></label>
+        <label for="width">Ширина (px): <input type="number" id="width" value="90" step="1" min="1"></label>
+        <label for="col-gap">Расстояние по горизонтали (%): <input type="number" id="col-gap" value="23.85" step="1" min="0"></label>
+        <label for="row-gap">Расстояние по вертикали (%): <input type="number" id="row-gap" value="28" step="1" min="0"></label>
+        <label for="start-x">Положение X (%): <input type="number" id="start-x" value="9.5" step="1" min="0"></label>
+        <label for="start-y">Положение Y (%): <input type="number" id="start-y" value="7" step="1" min="0"></label>
+        <label for="cols">Столбцы: <input type="number" id="cols" value="5" step="1" min="1"></label>
+        <label for="rows">Ряды: <input type="number" id="rows" value="5" step="1" min="1"></label>
     </div>
     
     <div class="background-container">
@@ -151,7 +142,6 @@
         function updateImageSize() {
             let width = document.getElementById('width').value + 'px';
             document.querySelectorAll('.image-slot img').forEach(img => {
-                // Устанавливаем ширину изображения через переменную CSS
                 img.style.setProperty('width', width);
             });
         }
